@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>천마 경마장 — 8인 멀티플레이</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="app">
+<header><div class="brand">🐎 <b>천마 경마장</b><small>8 PLAYER PIXEL DERBY</small></div><div class="account"><span id="accountName">게스트</span><span id="coins">🪙 2,000</span><select id="lang"><option value="ko">한국어</option><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option></select></div></header>
+<main>
+<section id="auth" class="screen">
+<div class="hero"><div><p class="eyebrow">REAL-TIME MULTIPLAYER</p><h1>질주하라.<br>5바퀴의 운명을 넘어.</h1><p>주자 8명 · 관전자 20명 · 방 최대 28명 · 실시간 채팅 & 배팅</p></div><div class="hero-badge">🏁<br><b>5 LAPS</b></div></div>
+<div class="auth-grid"><div class="panel"><h2>계정 로그인</h2><input id="loginId" placeholder="아이디"><input id="loginPw" type="password" placeholder="비밀번호"><button id="loginBtn">로그인</button></div><div class="panel"><h2>새 계정</h2><input id="regId" placeholder="아이디 (3~20자)"><input id="regPw" type="password" placeholder="비밀번호 (4자 이상)"><input id="regNick" placeholder="기본 닉네임"><button id="registerBtn">계정 만들기</button></div><div class="panel guest"><h2>빠른 입장</h2><p>계정 없이도 프로토타입을 체험할 수 있습니다.</p><input id="guestNick" placeholder="닉네임"><button id="guestBtn">게스트로 계속</button></div></div>
+</section>
+<section id="lobby" class="screen hidden"><div class="section-head"><div><p class="eyebrow">LOBBY</p><h2>경마장 로비</h2></div><div class="lobby-actions"><button id="createOpenBtn">＋ 방 만들기</button><button id="privateOpenBtn" class="secondary">🔒 비공개방 입장</button></div></div><div id="rooms" class="room-grid"></div>
+<div id="createPanel" class="modal hidden"><div class="modal-box"><button class="x" data-close="createPanel">×</button><h2>새 경마장 만들기</h2><input id="createName" placeholder="방 이름"><select id="createRole"><option value="runner">주자로 참가</option><option value="spectator">관전자로 참가</option></select><input id="createNick" placeholder="경기용 닉네임"><label class="check"><input id="privateRoom" type="checkbox"> 비공개방</label><input id="createPw" type="password" placeholder="비밀번호 (비공개방만)"><button id="createBtn">방 생성</button></div></div>
+<div id="joinPanel" class="modal hidden"><div class="modal-box"><button class="x" data-close="joinPanel">×</button><h2>비공개방 입장</h2><input id="joinId" placeholder="방 ID / 초대코드"><input id="joinPw" type="password" placeholder="비밀번호"><input id="joinNick" placeholder="경기용 닉네임"><select id="joinRole"><option value="runner">주자로 참가</option><option value="spectator">관전자로 참가</option></select><button id="joinBtn">입장</button></div></div>
+</section>
+<section id="game" class="screen hidden"><div class="gamebar"><div><b id="roomTitle"></b><span id="weather"></span><span id="lap"></span></div><div class="gamebar-actions"><button id="copyInvite" class="secondary">🔗 초대코드 복사</button><button id="startBtn">🏁 경기 시작</button><button id="leaveBtn" class="danger">로비</button></div></div>
+<div class="game-grid"><div class="track-card"><canvas id="track" width="1100" height="720"></canvas><div id="skillBanner" class="overlay hidden"></div><div id="incident" class="overlay incident hidden"></div><div class="race-info"><span>참가비 100 🪙</span><span>1위 400 · 2위 250 · 3위 150</span><span>컨디션 10분마다 변화</span></div><div class="betbar" id="betPanel"><div><b>🎰 관전자 배팅</b><small>당첨 풀은 승리 말에 비례 배분 · 수수료 5%는 1위 주자에게</small></div><select id="betHorse"></select><input id="betAmount" type="number" min="1" max="500" value="100"><button id="betBtn">배팅</button></div><button id="skillBtn" class="skill hidden">⚡ 필살 가속</button></div>
+<aside><div class="side-card"><h3>🏇 주자 / 👁 관전자</h3><div id="playerList"></div></div><div class="side-card chat"><div class="chat-head"><h3>실시간 채팅</h3><select id="chatLang"><option value="ko">KO</option><option value="en">EN</option><option value="ja">JA</option><option value="zh">ZH</option></select></div><div id="messages"></div><div class="chat-input"><input id="chatInput" placeholder="메시지를 입력..."><button id="chatBtn">전송</button></div></div></aside></div></section>
+</main><div id="toast"></div></div>
+<script src="/socket.io/socket.io.js"></script><script src="/app.js"></script>
+</body></html>
